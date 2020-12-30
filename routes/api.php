@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\BookController;
+use App\Http\Controllers\Api\Admin\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -27,4 +29,16 @@ Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
 
 Route::group(['prefix' => 'admin','as' => 'admin.'], function () {
     Route::apiResource('category',CategoryController::class);
+    Route::apiResource('contacts', ContactController::class);
+    Route::get('books',[BookController::class,'getAllBooks'])->name('book.get.all');
+    Route::get('books/{id}',[BookController::class,'getBook'])->name('book.get');
+    Route::post('books',[BookController::class,'createBook'])->name('book.create');
+    Route::put('books/{id}',[BookController::class,'updateBook'])->name('book.update');
+    Route::delete('books/{id}',[BookController::class,'deleteBook'])->name('book.delete');
 });
+// Route::get('books', 'Api\Admin\BookController@getAllBooks');
+// Route::get('books/{id}', 'Api\Admin\BookController@getBook');
+// Route::post('books', 'Api\Admin\BookController@createBook');
+// Route::put('books/{id}', 'Api\Admin\BookController@updateBook');
+// Route::delete('books/{id}','Api\Admin\BookController@deleteBook');
+

@@ -29,7 +29,35 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*Categories::create([
+            'name' => $request->name,
+            'color' => $request->color,
+            'status' => $request->status
+        ]);
+
+                 Or
+
+        $cat = new Categories();
+        $cat->name = $request->name;
+        $cat->color = $request->color;
+        $cat->status = $request->status;
+        if($cat->save()){
+            return response()->json([
+                'message' => 'Create successfully.'
+            ]);
+        }
+                Or
+        */
+        $data = [
+            'name' => $request->name,
+            'color' => $request->color,
+            'status' => $request->status
+        ];
+        Categories::create($data);
+        return response()->json([
+            'message' => 'Create new category successfully.'
+        ]);
+
     }
 
     /**
